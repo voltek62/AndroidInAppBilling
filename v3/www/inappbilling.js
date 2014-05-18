@@ -100,4 +100,13 @@ InAppBilling.prototype.getProductDetails = function (success, fail, skus) {
     }
 };
 
-module.exports = new InAppBilling();
+InAppBilling.install = function () {
+  if (!window.plugins) {
+    window.plugins = {};
+  }
+
+  window.plugins.inappbilling = new InAppBilling();
+  return window.plugins.inappbilling;
+};
+
+cordova.addConstructor(InAppBilling.install);
